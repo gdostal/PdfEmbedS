@@ -1,5 +1,5 @@
 <?php
-namespace PdfObjectEmbed;
+namespace PdfEmbed;
 
 use Omeka\Module\AbstractModule;
 

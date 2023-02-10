@@ -1,6 +1,6 @@
 <?php
 
-namespace PdfObjectEmbed;
+namespace PdfEmbed;
 
 use Omeka\Api\Representation\MediaRepresentation;
 use Omeka\Media\FileRenderer\RendererInterface;
