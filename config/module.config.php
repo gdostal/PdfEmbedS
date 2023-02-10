@@ -2,7 +2,7 @@
 return [
     'file_renderers' => [
         'invokables' => [
-            'pdf_embed' => 'PdfEmbed\PdfRenderer',
+            'pdf_embed' => 'PdfObjectEmbed\PdfRenderer',
         ],
         'aliases' => [
             'application/pdf' => 'pdf_embed',

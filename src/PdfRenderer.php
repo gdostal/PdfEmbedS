@@ -1,6 +1,6 @@
 <?php
 
-namespace PdfEmbed;
+namespace PdfObjectEmbed;
 
 use Omeka\Api\Representation\MediaRepresentation;
 use Omeka\Media\FileRenderer\RendererInterface;
@@ -10,9 +10,12 @@ class PdfRenderer implements RendererInterface
 {
     public function render(PhpRenderer $view, MediaRepresentation $media, array $options = [])
     {
-        return sprintf(
-            '<iframe src="%s" style="width: 100%%; height: 600px;" allowfullscreen></iframe>',
-            $view->escapeHtml($media->originalUrl())
-        );
+        $html = '<div class="object-embed" style="--aspect-ratio: 0.75/1;"><object data="%s" width="563" height="750" %s></object></div>';
+        $data = $view->escapeHtml( $media->originalUrl() );
+        !empty( $media->mediaType() ) ? $type = 'type="' . $view->escapeHtml( $media->mediaType() ) . '"' : $type = null ;
+
+        $view->headLink()->appendStylesheet($view->assetUrl('css/pdfObjectEmbed.css' , 'PdfObjectEmbed'));
+
+        return sprintf( $html , $data , $type );
     }
 }
