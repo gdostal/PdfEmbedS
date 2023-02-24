@@ -14,12 +14,9 @@ class PdfRenderer implements RendererInterface
     {
         $html = '<div class="object-embed" style="--aspect-ratio: %s;"><object data="%s" %s %s></object></div>';
         $data = $view->escapeHtml( $media->originalUrl() );
-		$ratio = aspect_ratio( $media );
-        !empty( $media->mediaType() ) ? $type = 'type="' . $view->escapeHtml( $media->mediaType() ) . '"' : $type = null ;
-
+        $ratio = aspectRatio($media);
+        !empty( $media->mediaType() ) ? $type = 'type="' . $view->escapeHtml( $media->mediaType() ) . '"' : $type = null;
         $view->headLink()->appendStylesheet($view->assetUrl('css/pdfObjectEmbed.css' , 'PdfEmbed'));
-
         return sprintf( $html , $ratio['0'], $data , $ratio['1'] , $type );
     }
-    
 }
