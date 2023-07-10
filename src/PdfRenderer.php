@@ -12,11 +12,12 @@ class PdfRenderer implements RendererInterface
 {
     public function render(PhpRenderer $view, MediaRepresentation $media, array $options = [])
     {
-        $html = '<div class="object-embed" style="--aspect-ratio: %s;"><object data="%s" %s %s></object></div>';
+        $html = '<div class="object-embed" style="--aspect-ratio: %s;"><object data="%s" %s %s><a href="%s" download="%s">%s</a></object></div>';
+        $linktext = $view->escapeHtml( $media->item()->title() );
         $data = $view->escapeHtml( $media->originalUrl() );
         $ratio = aspectRatio($media);
         !empty( $media->mediaType() ) ? $type = 'type="' . $view->escapeHtml( $media->mediaType() ) . '"' : $type = null;
         $view->headLink()->appendStylesheet($view->assetUrl('css/pdfObjectEmbed.css' , 'PdfEmbed'));
-        return sprintf( $html , $ratio['0'], $data , $ratio['1'] , $type );
+        return sprintf( $html , $ratio['0'], $data , $ratio['1'] , $type , $data , $linktext , $linktext );
     }
 }
